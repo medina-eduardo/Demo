@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Persona - Doechii</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .persona-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .input-container {
+            text-align: center;
+        }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="persona-card">
+        <h2 id="persona-name">Doechii</h2>
+        <p><strong>Age:</strong> <span id="persona-age">27</span></p>
+        <p><strong>Skills:</strong></p>
+        <ul id="persona-skills"></ul>
+    </div>
+
+    <div class="input-container">
+        <input type="text" id="skill-input" placeholder="Add a skill...">
+        <button onclick="addSkill()">Add Skill</button>
+    </div>
+
+    <script>
+        let userPersona = {
+            name: "Doechii",
+            age: 27,
+            skills: ["Music Production", "Stage Performance", "Creative Direction"],
+            introduce: function() {
+                return `Hi, I'm ${this.name}, a ${this.age}-year-old music enthusiast. I specialize in ${this.skills.join(", ")}.`;
+            }
+        };
+
+        function displaySkills() {
+            let skillList = document.getElementById("persona-skills");
+            skillList.innerHTML = "";
+            userPersona.skills.forEach(skill => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `- ${skill}`;
+                skillList.appendChild(listItem);
+            });
+        }
+
+        function addSkill() {
+            let skillInput = document.getElementById("skill-input");
+            let newSkill = skillInput.value.trim();
+
+            if (newSkill) {
+                userPersona.skills.push(newSkill);
+                displaySkills();
+                skillInput.value = "";
+            }
+        }
+
+        displaySkills();
+        console.log(userPersona.introduce());
+    </script>
+
+</body>
+</html>
